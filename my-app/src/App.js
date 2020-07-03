@@ -1,12 +1,21 @@
 import React from "react";
+
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect
 } from "react-router-dom";
 
+import Home from './pages/mainPage';
+import NotFoundPage from './pages/404';
+import MajorDepartment from './pages/majorDepartmentSearch';
+import Login from './pages/login';
+import SignIn from './pages/signIn';
+
 export default function App() {
+
   return (
     <Router>
       <div>
@@ -27,29 +36,16 @@ export default function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/signIn">
-            <SignIn />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
+          <Route exact path="/" component={Home}/>
+          <Route exact path="/login" component={Login}/>
+          <Route exact path="/signIn" component={SignIn}/>
+          <Route exact path="/majorDepartment" component={MajorDepartment}/>
+          <Route path="/404" component={NotFoundPage}/>
+          <Redirect to="/404" />
         </Switch>
       </div>
     </Router>
   );
-}
+};
 
-function Home() {
-  return <h2>Home</h2>;
-}
 
-function SignIn() {
-  return <h2>Sign In</h2>;
-}
-
-function Login() {
-  return <h2>Login</h2>;
-}
